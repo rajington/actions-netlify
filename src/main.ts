@@ -71,6 +71,7 @@ async function run(inputs: Inputs): Promise<void> {
     const overwritesPullRequestComment: boolean = inputs.overwritesPullRequestComment()
     const netlifyConfigPath: string | undefined = inputs.netlifyConfigPath()
     const alias: string | undefined = inputs.alias()
+    const functionsDir: string | undefined = inputs.functionsDir()
     const isDraft: boolean =
       productionBranch === undefined ||
       context.ref !== `refs/heads/${productionBranch}`
@@ -81,6 +82,7 @@ async function run(inputs: Inputs): Promise<void> {
     const deployFolder = path.resolve(process.cwd(), dir)
     // Deploy to Netlify
     const deploy = await netlifyClient.deploy(siteId, deployFolder, {
+      fnDir: functionsDir,
       draft: isDraft,
       message: deployMessage,
       configPath: netlifyConfigPath,

@@ -3,6 +3,7 @@ import * as core from '@actions/core'
 // Why use function rather than raw string? => Inputs should be lazy evaluated.
 export interface Inputs {
   publishDir(): string
+  functionsDir(): string | undefined
   deployMessage(): string | undefined
   productionBranch(): string | undefined
   enablePullRequestComment(): boolean
@@ -16,6 +17,9 @@ export interface Inputs {
 export const defaultInputs: Inputs = {
   publishDir() {
     return core.getInput('publish-dir', {required: true})
+  },
+  functionsDir() {
+    return core.getInput('functions-dir')
   },
   deployMessage() {
     return core.getInput('deploy-message') || undefined

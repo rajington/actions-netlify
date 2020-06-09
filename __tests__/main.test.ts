@@ -146,6 +146,15 @@ describe('defaultInputs', () => {
       })
     })
   })
+
+  describe('functionsDir', () => {
+    test('it should be a string when specified', () => {
+      withInput('functions-dir', '/functions', () => {
+        const functionsDir: string | undefined = defaultInputs.functionsDir()
+        expect(functionsDir).toBe('/functions')
+      })
+    })
+  })
 })
 
 // Old tests below
